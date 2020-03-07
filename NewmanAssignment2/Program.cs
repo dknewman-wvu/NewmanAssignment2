@@ -1,9 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using NewmanAssignment1.Helpers;
+using NewmanAssignment1.Services;
 
 namespace NewmanAssignment2
 {
     class Program
     {
+        public static List<string> _quiz;
+        public static string getAnswerKey;
+        public static string answserChosen;
+        public static bool isQuizStarted;
+
         static void Main(string[] args)
         {
             ShowMenu();
@@ -55,6 +72,9 @@ namespace NewmanAssignment2
             QUIT,
             UNASSIGNED
         }
+
+
+
 
     }
 }
