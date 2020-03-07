@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewmanAssignment1.Services
+namespace NewmanAssignment2.Services
 {
     class QuizService
     {

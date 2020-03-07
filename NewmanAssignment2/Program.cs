@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using NewmanAssignment1.Helpers;
-using NewmanAssignment1.Services;
+using NewmanAssignment2.Helpers;
+using NewmanAssignment2.Services;
 
 namespace NewmanAssignment2
 {
-    class Program
+    public  class Program
     {
         public static List<string> _quiz;
         public static string getAnswerKey;

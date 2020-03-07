@@ -1,4 +1,5 @@
-﻿using NewmanAssignment1.QuizData;
+﻿using NewmanAssignment2.QuizData;
+using NewmanAssignment2;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,9 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace NewmanAssignment1.Helpers
+namespace NewmanAssignment2.Helpers
 {
     public partial class FileProcessor
     {
@@ -25,9 +25,10 @@ namespace NewmanAssignment1.Helpers
         {
             try
             {
-                using (var reader = new StreamReader(Form1.openFileDialog1.FileName))
+                var filePath = "/somewhere";
+                using (var reader = new StreamReader(filePath))
                 {
-                    Form1._quiz = new List<string>();
+                    Program._quiz = new List<string>();
                     var textInBetween = new List<string>();
                     bool startTagFound = false;
 
@@ -46,7 +47,7 @@ namespace NewmanAssignment1.Helpers
                         if (!startTagFound)
                         {
                             startTagFound = line.StartsWith("@Q");
-                            Form1._quiz.Add(line);
+                            Program._quiz.Add(line);
 
                             continue;
 
@@ -57,12 +58,12 @@ namespace NewmanAssignment1.Helpers
                         if (endTagFound)
                         {
                             textInBetween.Clear();
-                            Form1._quiz.Add(line);
+                            Program._quiz.Add(line);
                             continue;
                         }
 
                         textInBetween.Add(line);
-                        Form1._quiz.Add(line);
+                        Program._quiz.Add(line);
 
                     }
 
@@ -75,7 +76,7 @@ namespace NewmanAssignment1.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                Console.Write($"Security error.\n\nError message: {ex.Message}\n\n" +
                 $"Details:\n\n{ex.StackTrace}");
             }
         }
@@ -87,10 +88,10 @@ namespace NewmanAssignment1.Helpers
                 // Populate the Question Bank
                 var questionIndex = new List<string>();
                 var answerIndex = new List<string>();
-                string result = string.Join(" ", Form1._quiz.ToArray());
+                string result = string.Join(" ", Program._quiz.ToArray());
                 questionBank = new List<string>();
                 answerKey = new List<string>();
-                answerBank = Form1._quiz;
+                answerBank = Program._quiz;
                 MatchCollection questionMatchIndex = Regex.Matches(result, "@Q");
 
 
@@ -191,7 +192,7 @@ namespace NewmanAssignment1.Helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                Console.WriteLine($"Security error.\n\nError message: {ex.Message}\n\n" +
                    $"Details:\n\n{ex.StackTrace}");
             }
 

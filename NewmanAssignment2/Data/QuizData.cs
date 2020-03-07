@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewmanAssignment1.QuizData
+namespace NewmanAssignment2.QuizData
 {
     public class DataQuiz
     {
