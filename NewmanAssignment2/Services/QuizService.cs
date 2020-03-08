@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NewmanAssignment2.Helpers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace NewmanAssignment2.Services
 
         public static void SetQuizQuestions()
         {
-            using (StreamReader r = new StreamReader(@"c:\quiz.json"))
+            using (StreamReader r = new StreamReader(@FileProcessor.path))
             {
                 string json = r.ReadToEnd();
                 quizItems = JsonConvert.DeserializeObject<List<QuizData.DataQuiz>>(json);

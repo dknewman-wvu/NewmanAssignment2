@@ -20,6 +20,7 @@ namespace NewmanAssignment2
         public static string getAnswerKey;
         public static string answserChosen;
         public static bool isQuizStarted;
+        public static string quizFilePath;
 
         static void Main(string[] args)
         {
@@ -33,7 +34,7 @@ namespace NewmanAssignment2
             Console.WriteLine();
             Console.WriteLine("STUDENT: David Newman");
             Console.WriteLine();
-            Console.WriteLine("1. Upload Question File");
+            Console.WriteLine("1. Set Question File Location");
             Console.WriteLine("2. Set the timer");
             Console.WriteLine("3. Start Quiz");
             Console.WriteLine("4. QUIT");
@@ -45,7 +46,10 @@ namespace NewmanAssignment2
                 switch (mmChoice)
                 {
                     case MainMenu.LOADQUIZ:
-                        Console.WriteLine("LOAD");
+                        Console.Clear();
+                        Console.WriteLine("Set the path to the question file");
+                        quizFilePath = Console.ReadLine();
+                        FileProcessor.ReadFile();
                         Console.Clear();
                         ShowMenu();
                         break;

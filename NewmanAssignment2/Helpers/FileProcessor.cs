@@ -20,13 +20,17 @@ namespace NewmanAssignment2.Helpers
         public static List<string> answerBlock;
         public static List<string> answerKey;
         public static List<QuizData.DataQuiz> popQuiz = new List<QuizData.DataQuiz>();
+        public static string tempDirectory = Path.GetTempPath();
+        public static string tempName = "quiz.json";
+        public static string tempLocation = tempDirectory + tempName;
+        public static string path = @tempLocation;
 
         public static void ReadFile()
         {
             try
             {
-                var filePath = "/somewhere";
-                using (var reader = new StreamReader(filePath))
+                Debug.WriteLine("TEMP LOCATION: " + tempLocation);
+                using (var reader = new StreamReader(Program.quizFilePath))
                 {
                     Program._quiz = new List<string>();
                     var textInBetween = new List<string>();
@@ -34,7 +38,8 @@ namespace NewmanAssignment2.Helpers
 
                     while (!reader.EndOfStream)
                     {
-                        string path = @"C:\quiz.json";
+                        //string path = @"C:\quiz.json";
+                       
                         if (File.Exists(path))
                         {
                             File.Delete(path);
@@ -169,7 +174,7 @@ namespace NewmanAssignment2.Helpers
                 }
 
                 string json = JsonConvert.SerializeObject(popQuiz, Formatting.Indented);
-                string path = @"C:\quiz.json";
+                string path = @tempLocation;
                 if (File.Exists(path))
                 {
                     using (var tw = new StreamWriter(path, true))
@@ -197,8 +202,10 @@ namespace NewmanAssignment2.Helpers
             }
 
 
+            Debug.WriteLine("BREAK");
 
 
         }
+
     }
 }
