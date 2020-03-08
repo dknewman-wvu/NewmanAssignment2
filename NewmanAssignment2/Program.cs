@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NewmanAssignment2.Data;
 using NewmanAssignment2.Helpers;
 using NewmanAssignment2.Services;
 
@@ -38,7 +39,7 @@ namespace NewmanAssignment2
             Console.WriteLine("STUDENT: David Newman");
             Console.WriteLine();
             Console.WriteLine("1. Set Question File Location");
-            Console.WriteLine("2. Set the timer");
+            Console.WriteLine("2. Set the number of questions");
             Console.WriteLine("3. Start Quiz");
             Console.WriteLine("4. QUIT");
 
@@ -73,22 +74,25 @@ namespace NewmanAssignment2
                         ShowMenu();
                         break;
 
-                    case MainMenu.SETTIMER:
-                        Console.WriteLine("TIMER");
+                    case MainMenu.SETNUMQUESTIONS:
+                        Console.Clear();
+                        Console.WriteLine("SET THE NUMBER OF QUESTIONS TO ASK: ");
+                        string numberOfQuestions = Console.ReadLine();
+                        QuizSettings.setNumQuestions = Int32.Parse(numberOfQuestions);
+                        Console.WriteLine("YOU WILL BE ASKED " + QuizSettings.setNumQuestions + " QUESTIONS");
+                        System.Threading.Thread.Sleep(2000);
+                        Console.Clear();
+                        ShowMenu();
                         break;
 
                     case MainMenu.STARTQUIZ:
-
                         GenerateQuestions();
-
                         GenerateAnswers();
-
                         answerChosen = Console.ReadLine();
-
-
                         if (getAnswerKey == answerChosen)
                         {
                             Console.WriteLine("CORRECT!");
+                            System.Threading.Thread.Sleep(2000);
                             Console.Clear();
                             GenerateQuiz();
                         }
@@ -102,17 +106,15 @@ namespace NewmanAssignment2
                             }
                             else
                             {
-                                Console.WriteLine("SORRY TRY AGAIN!");
+                                Console.WriteLine("SORRY THAT IS INCORRECT!");
+                                System.Threading.Thread.Sleep(2000);
                                 Console.Clear();
                                 GenerateQuiz();
-                            }
-                     
+                            }                 
 
                         }
-
-
-
                         break;
+
                     case MainMenu.QUIT:
                         Console.WriteLine("QUIT");
 
@@ -127,7 +129,7 @@ namespace NewmanAssignment2
         private enum MainMenu
         {
             LOADQUIZ = 1,
-            SETTIMER,
+            SETNUMQUESTIONS,
             STARTQUIZ,
             QUIT,
             UNASSIGNED
