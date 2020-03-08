@@ -14,13 +14,16 @@ using NewmanAssignment2.Services;
 
 namespace NewmanAssignment2
 {
-    public  class Program
+    public class Program
     {
         public static List<string> _quiz;
         public static string getAnswerKey;
         public static string answserChosen;
         public static bool isQuizStarted;
         public static string quizFilePath;
+        public static string answerChosen;
+        public static string sInput;
+
 
         static void Main(string[] args)
         {
@@ -39,8 +42,24 @@ namespace NewmanAssignment2
             Console.WriteLine("3. Start Quiz");
             Console.WriteLine("4. QUIT");
 
+            GenerateQuiz();
+
+
+        }
+
+        private static void GenerateQuiz()
+        {
             MainMenu mmChoice = MainMenu.UNASSIGNED;
-            string sInput = Console.ReadLine();
+            if (isQuizStarted != false)
+            {
+                sInput = "3";
+
+            }
+            else
+            {
+                sInput = Console.ReadLine();
+            }
+
             if (Enum.TryParse(sInput, out mmChoice))
             {
                 switch (mmChoice)
@@ -59,23 +78,44 @@ namespace NewmanAssignment2
                         break;
 
                     case MainMenu.STARTQUIZ:
-                        Console.Clear();
-                        Console.WriteLine("Question");
-                        Console.WriteLine(" ");
-                        QuizService.SetQuizQuestions();
-                        string newQuestion = QuizService.question.Trim();
-                        Console.Write(Regex.Replace(newQuestion, "^[0-9]+", string.Empty) + "\n");
-                        isQuizStarted = true;
-                        Console.WriteLine(" ");
-                        Console.WriteLine(" ");
+
+                        GenerateQuestions();
+
                         GenerateAnswers();
-                        Console.WriteLine("\n");
-                        Console.WriteLine("Please select your answer or type EXIT to quit.");
-                        Console.ReadLine();
-                        
+
+                        answerChosen = Console.ReadLine();
+
+
+                        if (getAnswerKey == answerChosen)
+                        {
+                            Console.WriteLine("CORRECT!");
+                            Console.Clear();
+                            GenerateQuiz();
+                        }
+                        else
+                        {
+                            if(answerChosen.ToUpper() == "EXIT")
+                            {
+                                isQuizStarted = false;
+                                Console.Clear();
+                                ShowMenu();
+                            }
+                            else
+                            {
+                                Console.WriteLine("SORRY TRY AGAIN!");
+                                Console.Clear();
+                                GenerateQuiz();
+                            }
+                     
+
+                        }
+
+
+
                         break;
                     case MainMenu.QUIT:
                         Console.WriteLine("QUIT");
+
                         break;
 
                     case MainMenu.UNASSIGNED:
@@ -93,8 +133,23 @@ namespace NewmanAssignment2
             UNASSIGNED
         }
 
+        public static void GenerateQuestions()
+        {
+            Console.Clear();
+            Console.WriteLine("Question");
+            Console.WriteLine(" ");
+            QuizService.SetQuizQuestions();
+            string newQuestion = QuizService.question.Trim();
+            Console.Write(Regex.Replace(newQuestion, "^[0-9]+", string.Empty) + "\n");
+            isQuizStarted = true;
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+
+
+        }
         public static void GenerateAnswers()
         {
+
 
             int num = 1;
 
@@ -103,6 +158,9 @@ namespace NewmanAssignment2
                 Console.WriteLine(" " + num + ": " + answer);
                 num = num + 1;
             }
+
+            Console.WriteLine("\n");
+            Console.WriteLine("Please select your answer or type EXIT to quit.");
 
             getAnswerKey = QuizService.answerKey.ToString();
             Debug.WriteLine("ANSWER KEY: " + getAnswerKey);
