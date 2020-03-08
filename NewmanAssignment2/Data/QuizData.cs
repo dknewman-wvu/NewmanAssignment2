@@ -11,6 +11,11 @@ namespace NewmanAssignment2.QuizData
         public string QuestionID { get; set; }
         public string Question { get; set; }
         public string AnswerKey { get; set; }
+
+        public int numberOfCorrect { get; set; }
+
+        public int numberOfWrong { get; set; }
+
         public string[] Answers { get; set; }
     }
 }

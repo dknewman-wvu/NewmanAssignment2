@@ -6,19 +6,7 @@ namespace NewmanAssignment2.Data
 {
     class QuizSettings
     {
-        public static int setNumQuestions { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
+        public static int setNumQuestions { get; set; } 
 
     }
 }
