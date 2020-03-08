@@ -59,7 +59,6 @@ namespace NewmanAssignment2.Services
         public static string GetCorrectAnswer()
         {
             string GetCorrectAnswer = quizItems[randomNumber].Answers[answerKey];
-            Console.WriteLine(GetCorrectAnswer);
             return GetCorrectAnswer;
         }
         public static int GetAnswerKey()
@@ -78,7 +77,6 @@ namespace NewmanAssignment2.Services
         public static void populateAnswers()
         {
             answer = GetAnswer();
-            Console.WriteLine("");
 
         }
 

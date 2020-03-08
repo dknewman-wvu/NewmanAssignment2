@@ -53,15 +53,31 @@ namespace NewmanAssignment2
                         Console.Clear();
                         ShowMenu();
                         break;
+
                     case MainMenu.SETTIMER:
                         Console.WriteLine("TIMER");
                         break;
+
                     case MainMenu.STARTQUIZ:
-                        Console.WriteLine("START");
+                        Console.Clear();
+                        Console.WriteLine("Question");
+                        Console.WriteLine(" ");
+                        QuizService.SetQuizQuestions();
+                        string newQuestion = QuizService.question.Trim();
+                        Console.Write(Regex.Replace(newQuestion, "^[0-9]+", string.Empty) + "\n");
+                        isQuizStarted = true;
+                        Console.WriteLine(" ");
+                        Console.WriteLine(" ");
+                        GenerateAnswers();
+                        Console.WriteLine("\n");
+                        Console.WriteLine("Please select your answer or type EXIT to quit.");
+                        Console.ReadLine();
+                        
                         break;
                     case MainMenu.QUIT:
                         Console.WriteLine("QUIT");
                         break;
+
                     case MainMenu.UNASSIGNED:
                         break;
                 }
@@ -76,6 +92,24 @@ namespace NewmanAssignment2
             QUIT,
             UNASSIGNED
         }
+
+        public static void GenerateAnswers()
+        {
+
+            int num = 1;
+
+            foreach (string answer in QuizService.answer.Skip(1))
+            {
+                Console.WriteLine(" " + num + ": " + answer);
+                num = num + 1;
+            }
+
+            getAnswerKey = QuizService.answerKey.ToString();
+            Debug.WriteLine("ANSWER KEY: " + getAnswerKey);
+            var answerPick = new object();
+
+        }
+
 
 
 

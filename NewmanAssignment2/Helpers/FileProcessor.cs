@@ -121,7 +121,6 @@ namespace NewmanAssignment2.Helpers
 
                 foreach (Match m in answerMatchIndex)
                 {
-                    Console.WriteLine(m.Index);
                     answerIndex.Add(m.Index.ToString());
 
                 }
