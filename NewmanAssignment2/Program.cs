@@ -42,7 +42,7 @@ namespace NewmanAssignment2
 
         }
 
-        private static void ShowMenu()
+        public static void ShowMenu()
         {
             Console.WriteLine("CSS 533 Quiz!");
             Console.WriteLine();

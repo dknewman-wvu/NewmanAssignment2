@@ -24,18 +24,30 @@ namespace NewmanAssignment2.Services
 
         public static void SetQuizQuestions()
         {
-            using (StreamReader r = new StreamReader(@FileProcessor.path))
+            try
             {
-                string json = r.ReadToEnd();
-                quizItems = JsonConvert.DeserializeObject<List<QuizData.DataQuiz>>(json);
-                count = GetCount();
-                Random rnd = new Random();
-                randomNumber = rnd.Next(count);
-                answerKey = GetAnswerKey();
-                correctAnswer = GetCorrectAnswer();
-                question = GetQuestion();
-                answer = GetAnswer();
-                Debug.WriteLine(randomNumber);
+                using (StreamReader r = new StreamReader(@FileProcessor.path))
+                {
+
+                    string json = r.ReadToEnd();
+                    quizItems = JsonConvert.DeserializeObject<List<QuizData.DataQuiz>>(json);
+                    count = GetCount();
+                    Random rnd = new Random();
+                    randomNumber = rnd.Next(count);
+                    answerKey = GetAnswerKey();
+                    correctAnswer = GetCorrectAnswer();
+                    question = GetQuestion();
+                    answer = GetAnswer();
+                    Debug.WriteLine(randomNumber);
+
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Something went wrong. Please check the file location and\n or check the file name and try agin...");
+                System.Threading.Thread.Sleep(5000);
+                Console.Clear();
+                Program.ShowMenu();
 
             }
 
