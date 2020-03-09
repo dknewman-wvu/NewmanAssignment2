@@ -158,7 +158,8 @@ namespace NewmanAssignment2
                         break;
 
                     case MainMenu.QUIT:
-                        Console.WriteLine("QUIT");
+                        Console.WriteLine("Goodbye!");
+                        Environment.Exit(0);
 
                         break;
 
